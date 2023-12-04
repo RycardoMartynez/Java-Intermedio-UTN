@@ -15,8 +15,9 @@ import java.util.List;
 public interface RIncidente extends JpaRepository<EIncidente, Long> {
     List<EIncidente> findByTecnicoOrderByFechaIngresoDesc(ETecnico tecnico);
 
-    // Consulta para obtener incidentes resueltos en los últimos N días
+    // Consulta para obtener incidentes resueltos en los últimos N días y que tecnico los resolvió
     @Query("SELECT i FROM EIncidente i LEFT JOIN FETCH i.tecnico WHERE i.resuelto = true AND i.fechaIngreso >= :fechaLimite")
+
     List<EIncidente> findIncidentesResueltosUltimosNDias(@Param("fechaLimite") Timestamp fechaLimite);
 
 
